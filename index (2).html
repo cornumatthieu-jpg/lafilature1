@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brewpub La Filature – Amiens</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-dark: #100c09;
+    --bg-mid: #1c1410;
+    --bg-card: #251a12;
+    --primary: #c47820;
+    --primary-light: #e09030;
+    --accent: #f0c040;
+    --copper: #b56a1a;
+    --cream: #f2e8d5;
+    --muted: #a08060;
+    --text: #e8d5b0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-dark);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+    padding: 0 40px;
+    background: linear-gradient(to bottom, rgba(16,12,9,.97) 80%, transparent);
+    border-bottom: 1px solid rgba(196,120,32,.2);
+    display: flex; align-items: center; justify-content: space-between;
+    height: 70px;
+    transition: background .3s;
+  }
+  .logo-area { display: flex; align-items: center; gap: 14px; }
+  .logo-icon {
+    width: 44px; height: 44px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .logo-text { font-family: 'Playfair Display', serif; font-size: 20px; letter-spacing: .04em; color: var(--cream); }
+  .logo-text span { color: var(--primary); font-style: italic; }
+  nav { display: flex; gap: 32px; align-items: center; }
+  nav a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 600; letter-spacing: .12em;
+    text-transform: uppercase; text-decoration: none; color: var(--muted);
+    transition: color .25s;
+  }
+  nav a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--primary); color: var(--bg-dark) !important;
+    padding: 8px 20px; border-radius: 2px;
+    font-weight: 700 !important;
+    transition: background .25s !important;
+  }
+  .nav-cta:hover { background: var(--accent) !important; }
+  .burger { display: none; cursor: pointer; font-size: 24px; color: var(--text); background: none; border: none; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--bg-dark);
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 60% 50%, rgba(196,120,32,.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(181,106,26,.12) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: .06;
+    background-image: linear-gradient(rgba(196,120,32,.5) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(196,120,32,.5) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center; padding: 80px 24px 40px;
+    max-width: 900px;
+  }
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; font-weight: 600; letter-spacing: .3em;
+    text-transform: uppercase; color: var(--primary);
+    margin-bottom: 24px;
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; flex: 1; max-width: 80px; height: 1px; background: var(--primary); opacity: .5;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(56px, 10vw, 110px);
+    font-weight: 900; line-height: .9;
+    color: var(--cream);
+    letter-spacing: -.02em;
+  }
+  h1 em { color: var(--primary); font-style: italic; display: block; }
+  .hero-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(16px, 3vw, 22px); font-weight: 300; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--muted);
+    margin-top: 20px;
+  }
+  .hero-desc {
+    max-width: 540px; margin: 32px auto 0;
+    font-size: 17px; line-height: 1.7; color: var(--text); opacity: .8;
+  }
+  .hero-btns { margin-top: 48px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--primary); color: var(--bg-dark);
+    font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    padding: 14px 36px; border: none; border-radius: 2px; cursor: pointer; text-decoration: none;
+    transition: background .25s, transform .15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+  .btn-outline {
+    border: 1px solid var(--primary); color: var(--primary);
+    font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    padding: 14px 36px; background: transparent; border-radius: 2px; cursor: pointer; text-decoration: none;
+    transition: all .25s;
+    display: inline-block;
+  }
+  .btn-outline:hover { background: var(--primary); color: var(--bg-dark); }
+  .hero-scroll {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--muted);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    animation: bob 2s ease-in-out infinite;
+  }
+  @keyframes bob { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+
+  /* ── SECTION BASE ── */
+  section { padding: 100px 40px; }
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .3em;
+    text-transform: uppercase; color: var(--primary); margin-bottom: 12px;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 60px); font-weight: 900; color: var(--cream);
+    line-height: 1.05; margin-bottom: 24px;
+  }
+  h2 em { color: var(--primary); font-style: italic; }
+  .lead { font-size: 18px; line-height: 1.75; color: var(--text); opacity: .85; max-width: 620px; }
+  .divider { width: 60px; height: 3px; background: var(--primary); margin: 20px 0; }
+
+  /* ── ABOUT ── */
+  #about { background: var(--bg-mid); }
+  .about-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .about-visual {
+    position: relative;
+  }
+  .about-img-frame {
+    width: 100%; aspect-ratio: 4/3;
+    background: var(--bg-card);
+    border: 1px solid rgba(196,120,32,.25);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .about-img-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; display: none; }
+  .about-img-frame img[src]:not([src=""]) { display: block; }
+  .about-placeholder {
+    text-align: center; color: var(--muted); font-family: 'Barlow Condensed', sans-serif; letter-spacing: .1em;
+    font-size: 13px; text-transform: uppercase;
+  }
+  .about-placeholder .icon { font-size: 48px; display: block; margin-bottom: 12px; opacity: .4; }
+  .about-badge {
+    position: absolute; bottom: -20px; right: -20px;
+    width: 100px; height: 100px; border-radius: 50%;
+    background: var(--primary);
+    display: flex; align-items: center; justify-content: center; flex-direction: column;
+    font-family: 'Playfair Display', serif; text-align: center; color: var(--bg-dark);
+    font-size: 11px; font-weight: 700; line-height: 1.3;
+    box-shadow: 0 0 0 8px var(--bg-mid);
+  }
+  .about-badge strong { font-size: 18px; display: block; }
+  .about-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+  .tag {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--primary);
+    border: 1px solid rgba(196,120,32,.4); padding: 6px 14px; border-radius: 2px;
+  }
+
+  /* ── SERVICES ── */
+  #services { background: var(--bg-dark); }
+  .services-inner { max-width: 1200px; margin: 0 auto; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
+  .service-card {
+    background: var(--bg-card);
+    padding: 48px 36px;
+    position: relative; overflow: hidden;
+    transition: background .3s;
+    cursor: default;
+  }
+  .service-card:hover { background: #2e201446; }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--primary); transform: scaleX(0); transform-origin: left;
+    transition: transform .4s;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon { font-size: 36px; margin-bottom: 20px; display: block; }
+  .service-card h3 {
+    font-family: 'Playfair Display', serif; font-size: 24px; color: var(--cream); margin-bottom: 12px;
+  }
+  .service-card p { font-size: 15px; line-height: 1.7; color: var(--text); opacity: .75; }
+  .service-hours {
+    margin-top: 20px; font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--primary);
+  }
+
+  /* ── BIÈRES ── */
+  #biere { background: var(--bg-mid); }
+  .biere-inner { max-width: 1200px; margin: 0 auto; }
+  .biere-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .biere-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+  .stat-box {
+    background: var(--bg-card); border: 1px solid rgba(196,120,32,.2);
+    padding: 32px 24px; text-align: center;
+  }
+  .stat-box .number {
+    font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 900;
+    color: var(--primary); line-height: 1;
+  }
+  .stat-box .label {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600;
+    letter-spacing: .15em; text-transform: uppercase; color: var(--muted); margin-top: 6px;
+  }
+  .biere-card-list { display: flex; flex-direction: column; gap: 16px; }
+  .biere-item {
+    background: var(--bg-card); padding: 20px 24px;
+    border-left: 3px solid var(--primary);
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'Barlow Condensed', sans-serif;
+  }
+  .biere-item .biere-name { font-size: 18px; font-weight: 600; color: var(--cream); }
+  .biere-item .biere-style { font-size: 13px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+  .biere-item .biere-badge {
+    font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    background: rgba(196,120,32,.2); color: var(--primary); padding: 4px 12px; border-radius: 2px;
+  }
+
+  /* ── ANIMATIONS ── */
+  #animations { background: var(--bg-dark); }
+  .anim-inner { max-width: 1200px; margin: 0 auto; }
+  .anim-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 60px; }
+  .anim-card {
+    background: var(--bg-card); border: 1px solid rgba(196,120,32,.1);
+    padding: 32px; display: flex; gap: 20px; align-items: flex-start;
+    transition: border-color .3s;
+  }
+  .anim-card:hover { border-color: rgba(196,120,32,.4); }
+  .anim-emoji { font-size: 32px; flex-shrink: 0; }
+  .anim-card h4 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--cream); margin-bottom: 8px; }
+  .anim-card p { font-size: 15px; line-height: 1.6; color: var(--text); opacity: .7; }
+
+  /* ── CALENDRIER ── */
+  #calendrier { background: var(--bg-mid); }
+  .cal-inner { max-width: 800px; margin: 0 auto; }
+  .calendar-wrap {
+    background: var(--bg-card); border: 1px solid rgba(196,120,32,.2);
+    border-radius: 4px; overflow: hidden; margin-top: 48px;
+  }
+  .cal-header {
+    background: var(--primary); padding: 16px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .cal-header h3 { font-family: 'Playfair Display', serif; color: var(--bg-dark); font-size: 20px; }
+  .cal-nav-btn {
+    background: rgba(0,0,0,.2); border: none; color: var(--bg-dark);
+    width: 32px; height: 32px; border-radius: 2px; cursor: pointer; font-size: 16px;
+    transition: background .2s;
+  }
+  .cal-nav-btn:hover { background: rgba(0,0,0,.35); }
+  .cal-grid { padding: 20px 24px; }
+  .cal-dow {
+    display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 8px;
+  }
+  .cal-dow span {
+    text-align: center; font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--muted); padding: 6px 0;
+  }
+  .cal-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .cal-day {
+    aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 600;
+    border-radius: 2px; cursor: pointer; transition: all .2s; color: var(--text);
+    position: relative; user-select: none;
+  }
+  .cal-day:hover:not(.empty):not(.past) { background: rgba(196,120,32,.15); }
+  .cal-day.empty { cursor: default; }
+  .cal-day.past { opacity: .3; cursor: default; }
+  .cal-day.open { background: rgba(34,139,34,.25); color: #5fba5f; }
+  .cal-day.closed { background: rgba(180,30,30,.2); color: #e05050; }
+  .cal-day.rdv { background: rgba(200,130,0,.25); color: var(--accent); }
+  .cal-day.today { box-shadow: 0 0 0 2px var(--primary); }
+  .cal-legend {
+    padding: 16px 24px; border-top: 1px solid rgba(196,120,32,.15);
+    display: flex; gap: 20px; flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: .06em;
+  }
+  .legend-dot { width: 12px; height: 12px; border-radius: 2px; }
+  .dot-open { background: rgba(34,139,34,.6); }
+  .dot-closed { background: rgba(180,30,30,.4); }
+  .dot-rdv { background: rgba(200,130,0,.5); }
+  .cal-mode-toggle {
+    margin: 20px 24px 0; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--muted); display: flex; gap: 10px;
+  }
+  .cal-mode-btn {
+    background: none; border: 1px solid rgba(196,120,32,.3); color: var(--muted);
+    padding: 4px 14px; border-radius: 2px; cursor: pointer; transition: all .2s;
+    font: inherit; letter-spacing: inherit; text-transform: inherit;
+  }
+  .cal-mode-btn.active { background: var(--primary); border-color: var(--primary); color: var(--bg-dark); }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--bg-dark); }
+  .contact-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; }
+  .contact-info h2 { margin-bottom: 8px; }
+  .contact-detail {
+    display: flex; align-items: flex-start; gap: 14px; margin-bottom: 28px;
+  }
+  .detail-icon {
+    width: 40px; height: 40px; background: rgba(196,120,32,.15); border-radius: 2px;
+    display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
+  }
+  .detail-label {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--primary); margin-bottom: 4px;
+  }
+  .detail-val { font-size: 16px; color: var(--text); line-height: 1.5; }
+  .detail-val a { color: var(--text); text-decoration: none; }
+  .detail-val a:hover { color: var(--accent); }
+  .social-links { display: flex; gap: 12px; margin-top: 32px; }
+  .social-link {
+    width: 44px; height: 44px; background: rgba(196,120,32,.15);
+    border: 1px solid rgba(196,120,32,.3); border-radius: 2px;
+    display: flex; align-items: center; justify-content: center; font-size: 18px;
+    text-decoration: none; transition: all .25s;
+  }
+  .social-link:hover { background: var(--primary); }
+  .contact-form-wrap { }
+  .form-group { margin-bottom: 20px; }
+  .form-group label {
+    display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: .2em; text-transform: uppercase; color: var(--primary); margin-bottom: 8px;
+  }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; background: var(--bg-card); border: 1px solid rgba(196,120,32,.25);
+    color: var(--text); font-family: 'Barlow', sans-serif; font-size: 15px;
+    padding: 12px 16px; border-radius: 2px; outline: none;
+    transition: border-color .25s;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--primary);
+  }
+  .form-group select option { background: var(--bg-card); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  #form-success {
+    display: none; background: rgba(34,139,34,.15); border: 1px solid rgba(34,139,34,.4);
+    padding: 16px 20px; border-radius: 2px; margin-top: 16px;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: .08em;
+    color: #5fba5f; text-transform: uppercase;
+  }
+
+  /* ── HORAIRES ── */
+  .hours-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  .hours-table td {
+    padding: 10px 0; border-bottom: 1px solid rgba(196,120,32,.1);
+    font-size: 15px; color: var(--text);
+  }
+  .hours-table td:first-child { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); width: 130px; }
+  .hours-table .closed-day { color: rgba(196,120,32,.4); font-style: italic; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg-mid); border-top: 1px solid rgba(196,120,32,.15);
+    padding: 60px 40px 40px;
+  }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 48px; }
+  .footer-brand .logo-text { font-size: 22px; margin-bottom: 16px; display: block; }
+  .footer-brand p { font-size: 14px; line-height: 1.7; color: var(--muted); max-width: 320px; }
+  footer h4 {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--primary); margin-bottom: 20px;
+  }
+  footer ul { list-style: none; }
+  footer ul li { margin-bottom: 10px; }
+  footer ul a {
+    font-size: 14px; color: var(--muted); text-decoration: none; transition: color .2s;
+    font-family: 'Barlow Condensed', sans-serif; letter-spacing: .05em;
+  }
+  footer ul a:hover { color: var(--accent); }
+  .footer-bottom {
+    border-top: 1px solid rgba(196,120,32,.1); padding-top: 28px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: .08em;
+    color: rgba(160,128,96,.5);
+  }
+
+  /* ── EDITOR ── */
+  #editor-toggle {
+    position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+    background: var(--primary); color: var(--bg-dark); border: none;
+    width: 52px; height: 52px; border-radius: 50%; font-size: 20px; cursor: pointer;
+    box-shadow: 0 4px 20px rgba(196,120,32,.4);
+    transition: transform .2s, box-shadow .2s;
+  }
+  #editor-toggle:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(196,120,32,.6); }
+  #editor-panel {
+    position: fixed; top: 0; right: -420px; width: 400px; height: 100vh; z-index: 9998;
+    background: #1a1108; border-left: 2px solid var(--primary);
+    overflow-y: auto; transition: right .35s cubic-bezier(.4,0,.2,1);
+    padding: 0 0 40px;
+  }
+  #editor-panel.open { right: 0; }
+  .ed-header {
+    background: var(--primary); padding: 18px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    position: sticky; top: 0; z-index: 1;
+  }
+  .ed-header h3 { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--bg-dark); }
+  .ed-close { background: none; border: none; font-size: 22px; color: var(--bg-dark); cursor: pointer; }
+  .ed-tabs {
+    display: flex; border-bottom: 1px solid rgba(196,120,32,.2);
+    padding: 0 16px; gap: 4px;
+  }
+  .ed-tab {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted); background: none; border: none;
+    padding: 12px 12px; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px;
+    transition: all .2s;
+  }
+  .ed-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+  .ed-body { padding: 24px; }
+  .ed-section { display: none; }
+  .ed-section.active { display: block; }
+  .ed-field { margin-bottom: 18px; }
+  .ed-field label {
+    display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: .2em; text-transform: uppercase; color: var(--primary); margin-bottom: 6px;
+  }
+  .ed-field input, .ed-field textarea {
+    width: 100%; background: var(--bg-card); border: 1px solid rgba(196,120,32,.25);
+    color: var(--text); font-family: 'Barlow', sans-serif; font-size: 13px;
+    padding: 8px 12px; border-radius: 2px; outline: none; resize: vertical;
+  }
+  .ed-field input[type="color"] { height: 36px; padding: 2px 6px; cursor: pointer; }
+  .ed-save-btn {
+    width: 100%; background: var(--primary); color: var(--bg-dark);
+    font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; padding: 14px; border: none; border-radius: 2px; cursor: pointer;
+    margin-top: 8px; transition: background .25s;
+  }
+  .ed-save-btn:hover { background: var(--accent); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 960px) {
+    header { padding: 0 20px; }
+    nav { display: none; }
+    nav.open { display: flex; flex-direction: column; position: fixed; top: 70px; left: 0; right: 0; background: var(--bg-dark); padding: 24px; border-bottom: 1px solid rgba(196,120,32,.2); z-index: 999; gap: 16px; }
+    .burger { display: block; }
+    section { padding: 70px 20px; }
+    .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+    .services-grid { grid-template-columns: 1fr; gap: 2px; }
+    .biere-intro { grid-template-columns: 1fr; gap: 48px; }
+    .biere-stats { grid-template-columns: 1fr 1fr; }
+    .anim-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; gap: 36px; }
+    .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    .form-row { grid-template-columns: 1fr; }
+    #editor-panel { width: 100%; right: -100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-area">
+    <div class="logo-icon">🍺</div>
+    <div class="logo-text">La <span>Filature</span></div>
+  </div>
+  <button class="burger" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+  <nav>
+    <a href="#about">À propos</a>
+    <a href="#services">Bar & Resto</a>
+    <a href="#biere">Nos Bières</a>
+    <a href="#animations">Animations</a>
+    <a href="#calendrier">Agenda</a>
+    <a href="#contact" class="nav-cta">Contact</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="accueil">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Micro-brasserie · Bar · Restaurant</div>
+    <h1 data-editable="hero-title">La<em>Filature</em></h1>
+    <div class="hero-sub" data-editable="hero-sub">Amiens — Usine Cosserat</div>
+    <p class="hero-desc" data-editable="hero-desc">Un lieu unique au cœur du quartier de la Tisserie, dans l'ancienne manufacture Cosserat. Bières brassées sur place, cuisine faite maison, animations chaque semaine.</p>
+    <div class="hero-btns">
+      <a href="#services" class="btn-primary">Découvrir le lieu</a>
+      <a href="#contact" class="btn-outline">Nous contacter</a>
+    </div>
+  </div>
+  <div class="hero-scroll">↓ Découvrir</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-visual">
+      <div class="about-img-frame" id="about-img-frame">
+        <img id="about-img" data-editable-img="about-img" src="" alt="La Filature Amiens">
+        <div class="about-placeholder" id="about-placeholder">
+          <span class="icon">🏭</span>
+          <span>Photo de l'établissement</span><br>
+          <span style="font-size:11px;opacity:.6">(modifier via éditeur 🛠️)</span>
+        </div>
+      </div>
+      <div class="about-badge">
+        <strong>2023</strong>
+        Ouverture
+      </div>
+    </div>
+    <div>
+      <div class="section-label">Notre histoire</div>
+      <h2>Premier <em>brewpub</em> d'Amiens</h2>
+      <div class="divider"></div>
+      <p class="lead" data-editable="about-text">Ouvert en 2023 sur le site historique de l'ancienne usine Cosserat, La Filature est né de la passion de Nicolas Prudhomme, fondateur de la Cave du Houblon en 2012 et du festival Amiens Met La Pression. Avec Pauline Corme et Vincent Leulier, ils ont créé un lieu à l'esprit bistrot des années 30, hommage aux estaminets du Nord.</p>
+      <div class="about-tags">
+        <span class="tag">Micro-brasserie</span>
+        <span class="tag">Fait maison</span>
+        <span class="tag">Produits locaux</span>
+        <span class="tag">Site Cosserat</span>
+        <span class="tag">Depuis 2023</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-inner">
+    <div class="section-label">Bar & Restaurant</div>
+    <h2>Trois <em>moments</em>, un lieu</h2>
+    <div class="divider"></div>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-icon">🍽️</span>
+        <h3 data-editable="service1-title">Restaurant le Midi</h3>
+        <p data-editable="service1-desc">Restauration traditionnelle entièrement faite maison avec des produits locaux et de saison. Carte de 3 plats au choix, simple mais savoureux.</p>
+        <div class="service-hours" data-editable="service1-hours">Mer – Dim · 12h00 – 14h30</div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🍺</span>
+        <h3 data-editable="service2-title">Bar & Pub le Soir</h3>
+        <p data-editable="service2-desc">Ambiance pub avec des bières brassées sur place, 15 tirages pression, vins naturels, cidre et softs artisanaux. Snacking gourmand fait maison.</p>
+        <div class="service-hours" data-editable="service2-hours">Mer – Dim · à partir de 18h00</div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">☀️</span>
+        <h3 data-editable="service3-title">Guinguette le Dimanche</h3>
+        <p data-editable="service3-desc">Le dimanche, place à la guinguette ! Midi restauration puis après-midi animé de juin à août. L'endroit parfait pour profiter des beaux jours.</p>
+        <div class="service-hours" data-editable="service3-hours">Dim · 12h00 – 18h00 (juin–août)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIÈRES -->
+<section id="biere">
+  <div class="biere-inner">
+    <div class="biere-intro">
+      <div>
+        <div class="section-label">Micro-brasserie</div>
+        <h2>Brassées <em>ici</em>, pour vous</h2>
+        <div class="divider"></div>
+        <p class="lead" data-editable="biere-text">Nos bières maison sont brassées sur place par Vincent, notre brasseur passionné. Renouvelées régulièrement, elles sortent des classiques tout en plaisant au plus grand nombre : ales, bières acides, sans alcool… Une diversité de saveurs à chaque visite.</p>
+        <div class="biere-stats">
+          <div class="stat-box">
+            <div class="number">6–8</div>
+            <div class="label">Bières maison</div>
+          </div>
+          <div class="stat-box">
+            <div class="number">15</div>
+            <div class="label">Tirages pression</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="biere-card-list">
+          <div class="biere-item">
+            <div>
+              <div class="biere-name" data-editable="biere1">Blonde de la Filature</div>
+              <div class="biere-style">Ale Blonde · maison</div>
+            </div>
+            <span class="biere-badge">Maison</span>
+          </div>
+          <div class="biere-item">
+            <div>
+              <div class="biere-name" data-editable="biere2">Ambrée Cosserat</div>
+              <div class="biere-style">Ale Ambrée · maison</div>
+            </div>
+            <span class="biere-badge">Maison</span>
+          </div>
+          <div class="biere-item">
+            <div>
+              <div class="biere-name" data-editable="biere3">Session IPA</div>
+              <div class="biere-style">India Pale Ale · maison</div>
+            </div>
+            <span class="biere-badge">Maison</span>
+          </div>
+          <div class="biere-item">
+            <div>
+              <div class="biere-name" data-editable="biere4">Sour du Tisserin</div>
+              <div class="biere-style">Bière Acide · maison</div>
+            </div>
+            <span class="biere-badge">Maison</span>
+          </div>
+          <div class="biere-item">
+            <div>
+              <div class="biere-name" data-editable="biere5">Sans Alcool Artisanale</div>
+              <div class="biere-style">0% · maison</div>
+            </div>
+            <span class="biere-badge">Maison</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANIMATIONS -->
+<section id="animations">
+  <div class="anim-inner">
+    <div class="section-label">Chaque semaine</div>
+    <h2>Animations <em>& concerts</em></h2>
+    <div class="divider"></div>
+    <div class="anim-grid">
+      <div class="anim-card">
+        <span class="anim-emoji">🎵</span>
+        <div>
+          <h4 data-editable="anim1-title">Concerts & DJ sets</h4>
+          <p data-editable="anim1-desc">Musique live et soirées DJ régulièrement programmées dans l'ambiance chaleureuse de la salle. Rock, folk, électro… en accord avec l'esprit du lieu.</p>
+        </div>
+      </div>
+      <div class="anim-card">
+        <span class="anim-emoji">🎤</span>
+        <div>
+          <h4 data-editable="anim2-title">Stand-up & Quiz</h4>
+          <p data-editable="anim2-desc">Soirées comédie et quiz culturels pour tester vos connaissances en bonne compagnie. Des moments de convivialité à partager entre amis.</p>
+        </div>
+      </div>
+      <div class="anim-card">
+        <span class="anim-emoji">🍺</span>
+        <div>
+          <h4 data-editable="anim3-title">Ateliers Biérologie</h4>
+          <p data-editable="anim3-desc">Découvrez les secrets du brassage, apprenez à déguster, explorez les styles… Nos ateliers biérologie sont ouverts à tous, curieux et connaisseurs.</p>
+        </div>
+      </div>
+      <div class="anim-card">
+        <span class="anim-emoji">🎪</span>
+        <div>
+          <h4 data-editable="anim4-title">Événements spéciaux</h4>
+          <p data-editable="anim4-desc">Privatisations, soirées à thème, collaborations avec le festival Amiens Met La Pression… Suivez-nous sur Facebook et Instagram pour ne rien manquer !</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDRIER -->
+<section id="calendrier">
+  <div class="cal-inner">
+    <div class="section-label">Ouvertures & Réservations</div>
+    <h2>Agenda <em>& disponibilités</em></h2>
+    <div class="divider"></div>
+    <div class="calendar-wrap">
+      <div class="cal-mode-toggle" style="padding:16px 24px 0;">
+        <button class="cal-mode-btn active" id="btn-visitor" onclick="setMode('visitor')">👁 Mode visiteur</button>
+        <button class="cal-mode-btn" id="btn-editor" onclick="setMode('editor')">✏️ Mode gérant</button>
+      </div>
+      <div class="cal-header">
+        <button class="cal-nav-btn" onclick="changeMonth(-1)">‹</button>
+        <h3 id="cal-month-label">Avril 2025</h3>
+        <button class="cal-nav-btn" onclick="changeMonth(1)">›</button>
+      </div>
+      <div class="cal-grid">
+        <div class="cal-dow">
+          <span>Lun</span><span>Mar</span><span>Mer</span><span>Jeu</span><span>Ven</span><span>Sam</span><span>Dim</span>
+        </div>
+        <div class="cal-days" id="cal-days"></div>
+      </div>
+      <div class="cal-legend">
+        <div class="legend-item"><div class="legend-dot dot-open"></div>Ouvert</div>
+        <div class="legend-item"><div class="legend-dot dot-closed"></div>Fermé</div>
+        <div class="legend-item"><div class="legend-dot dot-rdv"></div>Sur réservation</div>
+      </div>
+      <div id="cal-visitor-cta" style="padding:0 24px 20px;">
+        <p style="font-size:14px;color:var(--muted);margin-bottom:12px;">Intéressé par une date ? Contactez-nous pour réserver.</p>
+        <a href="#contact" class="btn-primary" style="font-size:12px;padding:10px 24px;">Demander un RDV</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div class="section-label">Nous trouver</div>
+      <h2>Contact <em>& horaires</em></h2>
+      <div class="divider"></div>
+      <div class="contact-detail">
+        <div class="detail-icon">📍</div>
+        <div>
+          <div class="detail-label">Adresse</div>
+          <div class="detail-val" data-editable="address">Usine Cosserat<br>200 Rue Maberly<br>80000 Amiens</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="detail-icon">📞</div>
+        <div>
+          <div class="detail-label">Téléphone</div>
+          <div class="detail-val"><a href="tel:0695176565" data-editable="phone">06.95.17.65.65</a></div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="detail-icon">🕐</div>
+        <div>
+          <div class="detail-label">Horaires</div>
+          <div class="detail-val">
+            <table class="hours-table">
+              <tr><td>Lundi</td><td class="closed-day">Fermé</td></tr>
+              <tr><td>Mardi</td><td class="closed-day">Fermé</td></tr>
+              <tr><td>Mercredi</td><td data-editable="hours-mer">12h – 14h30 · 18h – 23h</td></tr>
+              <tr><td>Jeudi</td><td data-editable="hours-jeu">12h – 14h30 · 18h – 23h</td></tr>
+              <tr><td>Vendredi</td><td data-editable="hours-ven">12h – 14h30 · 18h – 00h</td></tr>
+              <tr><td>Samedi</td><td data-editable="hours-sam">12h – 14h30 · 18h – 00h</td></tr>
+              <tr><td>Dimanche</td><td data-editable="hours-dim">12h – 18h (guinguette juin–août)</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="social-links">
+        <a href="https://www.facebook.com/Lafilature.amiens/?locale=fr_FR" target="_blank" class="social-link" title="Facebook">📘</a>
+        <a href="https://www.instagram.com/brewpublafilature/" target="_blank" class="social-link" title="Instagram">📷</a>
+      </div>
+    </div>
+    <div class="contact-form-wrap">
+      <div class="section-label">Nous écrire</div>
+      <h2 style="font-size:36px;">Envoyez-nous <em>un message</em></h2>
+      <div class="divider"></div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nom *</label>
+          <input type="text" id="f-name" placeholder="Votre nom" required>
+        </div>
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" id="f-email" placeholder="votre@email.com" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Téléphone</label>
+          <input type="tel" id="f-tel" placeholder="06 XX XX XX XX">
+        </div>
+        <div class="form-group">
+          <label>Objet</label>
+          <select id="f-subject">
+            <option>Réservation de groupe</option>
+            <option>Privatisation / Événement</option>
+            <option>Atelier biérologie</option>
+            <option>Renseignement général</option>
+            <option>Animation / Concert</option>
+            <option>Autre</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Message *</label>
+        <textarea id="f-message" placeholder="Votre message…" required></textarea>
+      </div>
+      <button class="btn-primary" onclick="sendForm()">Envoyer le message</button>
+      <div id="form-success">✅ Message préparé ! Votre client mail va s'ouvrir.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo-text">La <span>Filature</span></span>
+        <p>Brewpub artisanal au cœur d'Amiens. Micro-brasserie, bar et restaurant dans l'ancienne usine Cosserat — un lieu qui tisse l'histoire et la convivialité.</p>
+        <div class="social-links" style="margin-top:20px;">
+          <a href="https://www.facebook.com/Lafilature.amiens/?locale=fr_FR" target="_blank" class="social-link">📘</a>
+          <a href="https://www.instagram.com/brewpublafilature/" target="_blank" class="social-link">📷</a>
+        </div>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#about">À propos</a></li>
+          <li><a href="#services">Bar & Restaurant</a></li>
+          <li><a href="#biere">Nos bières</a></li>
+          <li><a href="#animations">Animations</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Infos pratiques</h4>
+        <ul>
+          <li><a href="#">Accessibilité</a></li>
+          <li><a href="#">Site Cosserat</a></li>
+          <li><a href="#">Privatisation</a></li>
+          <li><a href="#">Mentions légales</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Brewpub La Filature – Amiens. Tous droits réservés.</span>
+      <span>200 Rue Maberly, 80000 Amiens · 06.95.17.65.65</span>
+    </div>
+  </div>
+</footer>
+
+<!-- EDITOR TOGGLE -->
+<button id="editor-toggle" onclick="toggleEditor()" title="Modifier le site">🛠️</button>
+
+<!-- EDITOR PANEL -->
+<div id="editor-panel">
+  <div class="ed-header">
+    <h3>🛠️ Éditeur visuel</h3>
+    <button class="ed-close" onclick="toggleEditor()">✕</button>
+  </div>
+  <div class="ed-tabs">
+    <button class="ed-tab active" onclick="switchTab('texts')">✏️ Textes</button>
+    <button class="ed-tab" onclick="switchTab('images')">🖼️ Images</button>
+    <button class="ed-tab" onclick="switchTab('colors')">🎨 Couleurs</button>
+    <button class="ed-tab" onclick="switchTab('save')">💾 Export</button>
+  </div>
+  <div class="ed-body">
+    <div class="ed-section active" id="ed-texts"></div>
+    <div class="ed-section" id="ed-images">
+      <div class="ed-field">
+        <label>Photo À propos (URL)</label>
+        <input type="text" placeholder="https://..." id="img-about" oninput="updateImage('about-img', this.value)">
+      </div>
+    </div>
+    <div class="ed-section" id="ed-colors">
+      <div class="ed-field">
+        <label>Couleur principale (ambre)</label>
+        <input type="color" value="#c47820" oninput="updateColor('--primary', this.value)">
+      </div>
+      <div class="ed-field">
+        <label>Couleur accent (or)</label>
+        <input type="color" value="#f0c040" oninput="updateColor('--accent', this.value)">
+      </div>
+      <div class="ed-field">
+        <label>Fond principal</label>
+        <input type="color" value="#100c09" oninput="updateColor('--bg-dark', this.value)">
+      </div>
+      <div class="ed-field">
+        <label>Couleur texte</label>
+        <input type="color" value="#e8d5b0" oninput="updateColor('--text', this.value)">
+      </div>
+    </div>
+    <div class="ed-section" id="ed-save">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.6;">Toutes vos modifications sont intégrées. Cliquez sur le bouton ci-dessous pour télécharger votre site HTML personnalisé.</p>
+      <button class="ed-save-btn" onclick="downloadSite()">💾 Télécharger mon site</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── CALENDAR ──
+let calYear, calMonth, calMode = 'visitor';
+let calData = JSON.parse(localStorage.getItem('filature_cal') || '{}');
+const MONTHS = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+const today = new Date();
+
+function initCal() {
+  calYear = today.getFullYear();
+  calMonth = today.getMonth();
+  renderCal();
+}
+
+function renderCal() {
+  document.getElementById('cal-month-label').textContent = MONTHS[calMonth] + ' ' + calYear;
+  const days = document.getElementById('cal-days');
+  days.innerHTML = '';
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const totalDays = new Date(calYear, calMonth+1, 0).getDate();
+  const offset = (firstDay + 6) % 7; // Monday first
+  for (let i = 0; i < offset; i++) {
+    const e = document.createElement('div'); e.className = 'cal-day empty'; days.appendChild(e);
+  }
+  for (let d = 1; d <= totalDays; d++) {
+    const key = `${calYear}-${calMonth}-${d}`;
+    const state = calData[key];
+    const e = document.createElement('div');
+    e.className = 'cal-day';
+    e.textContent = d;
+    const isPast = new Date(calYear, calMonth, d) < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    if (isPast) e.classList.add('past');
+    if (state === 'open') e.classList.add('open');
+    else if (state === 'closed') e.classList.add('closed');
+    else if (state === 'rdv') e.classList.add('rdv');
+    if (d === today.getDate() && calMonth === today.getMonth() && calYear === today.getFullYear()) e.classList.add('today');
+    if (calMode === 'editor' && !isPast) {
+      e.addEventListener('click', () => cycleDay(key, e));
+    }
+    days.appendChild(e);
+  }
+}
+
+function cycleDay(key, el) {
+  const states = [undefined, 'open', 'closed', 'rdv'];
+  const cur = calData[key];
+  const idx = states.indexOf(cur);
+  const next = states[(idx + 1) % states.length];
+  if (next === undefined) delete calData[key]; else calData[key] = next;
+  localStorage.setItem('filature_cal', JSON.stringify(calData));
+  renderCal();
+}
+
+function changeMonth(dir) {
+  calMonth += dir;
+  if (calMonth < 0) { calMonth = 11; calYear--; }
+  if (calMonth > 11) { calMonth = 0; calYear++; }
+  renderCal();
+}
+
+function setMode(mode) {
+  calMode = mode;
+  document.getElementById('btn-visitor').classList.toggle('active', mode === 'visitor');
+  document.getElementById('btn-editor').classList.toggle('active', mode === 'editor');
+  document.getElementById('cal-visitor-cta').style.display = mode === 'visitor' ? 'block' : 'none';
+  renderCal();
+}
+
+initCal();
+
+// ── FORM ──
+function sendForm() {
+  const name = document.getElementById('f-name').value;
+  const email = document.getElementById('f-email').value;
+  const subject = document.getElementById('f-subject').value;
+  const message = document.getElementById('f-message').value;
+  if (!name || !email || !message) { alert('Merci de remplir les champs obligatoires.'); return; }
+  const body = `Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+  window.location.href = `mailto:contact@lafilature-amiens.fr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  document.getElementById('form-success').style.display = 'block';
+}
+
+// ── EDITOR ──
+function toggleEditor() {
+  document.getElementById('editor-panel').classList.toggle('open');
+  if (document.getElementById('editor-panel').classList.contains('open')) buildTextFields();
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.ed-tab').forEach((t,i) => t.classList.remove('active'));
+  document.querySelectorAll('.ed-section').forEach(s => s.classList.remove('active'));
+  const tabs = ['texts','images','colors','save'];
+  const idx = tabs.indexOf(tab);
+  document.querySelectorAll('.ed-tab')[idx].classList.add('active');
+  document.getElementById('ed-' + tab).classList.add('active');
+}
+
+function buildTextFields() {
+  const container = document.getElementById('ed-texts');
+  container.innerHTML = '';
+  document.querySelectorAll('[data-editable]').forEach(el => {
+    const key = el.getAttribute('data-editable');
+    const div = document.createElement('div'); div.className = 'ed-field';
+    const label = document.createElement('label'); label.textContent = key.replace(/-/g,' ');
+    const isMulti = el.tagName === 'P' || el.innerHTML.includes('<br>');
+    const input = isMulti ? document.createElement('textarea') : document.createElement('input');
+    input.value = el.innerText || el.textContent;
+    if (isMulti) input.rows = 3;
+    input.oninput = () => { el.innerHTML = input.value.replace(/\n/g,'<br>'); };
+    div.appendChild(label); div.appendChild(input);
+    container.appendChild(div);
+  });
+}
+
+function updateImage(id, url) {
+  const img = document.getElementById(id);
+  if (url) {
+    img.src = url;
+    img.style.display = 'block';
+    document.getElementById('about-placeholder').style.display = 'none';
+  } else {
+    img.style.display = 'none';
+    document.getElementById('about-placeholder').style.display = '';
+  }
+}
+
+function updateColor(varName, val) {
+  document.documentElement.style.setProperty(varName, val);
+}
+
+function downloadSite() {
+  const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+  const blob = new Blob([html], {type:'text/html'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'la-filature-amiens.html';
+  a.click();
+}
+
+// ── HEADER SCROLL ──
+window.addEventListener('scroll', () => {
+  const h = document.querySelector('header');
+  if (window.scrollY > 60) {
+    h.style.background = 'rgba(16,12,9,.98)';
+  } else {
+    h.style.background = '';
+  }
+});
+</script>
+</body>
+</html>
